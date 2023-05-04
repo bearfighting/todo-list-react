@@ -1,9 +1,13 @@
 import { useState } from "react"
 import "./todo.css"
+import { ToDo } from "./todo-list"
 
-const Todo: React.FC = () => {
+interface ToDoProps {
+  setTasks: React.Dispatch<React.SetStateAction<ToDo[]>>
+}
+
+const Todo: React.FC<ToDoProps> = ({setTasks}) => {
   const [task, setTask] = useState("")
-  const [tasks, setTasks] = useState<Array<string>>([])
   return (
     <div className="todo">
       <input
@@ -12,18 +16,7 @@ const Todo: React.FC = () => {
         value={task}
         onChange={(e) => setTask(e.target.value)}
       />
-      <button
-        onClick={() => {
-          setTasks((prev) => [...prev, task])
-        }}
-      >
-        Add
-      </button>
-      <div>
-        {tasks.map((task) => (
-          <div>{task}</div>
-        ))}
-      </div>
+      <button onClick={() => {setTasks(prev => [...prev, {name: task, done: false}]); setTask('')}}>Add</button>
     </div>
   )
 }

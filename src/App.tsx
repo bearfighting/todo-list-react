@@ -6,11 +6,11 @@ import TodoList, { ToDo } from './components/todo-list'
 
 
 function App() {
-  const [todoList, setTodoList] = useState<Array<ToDo>>([{index: 0, name: 'task1', done: false}])
+  const [todoList, setTodoList] = useState<Array<ToDo>>([{name: 'task1', done: false}])
   return (
     <div className='container'>
       <Title/>
-      <Todo/>
+      <Todo setTasks={setTodoList}/>
       <TodoList list={todoList}/>
     </div>
   )
